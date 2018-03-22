@@ -1,12 +1,12 @@
 package core;
 
-import exception.IdNonValidoException;
 import exception.OraNonValidaException;
 import prog.utili.Orario;
 
 public abstract class Sfida implements Comparable<Sfida> {
 
 	private static int numSfide = 0;
+	private static boolean ordinamentoPerOra;
 	private String id;
 	private String descrizione;
 	protected Orario ora;
@@ -22,14 +22,12 @@ public abstract class Sfida implements Comparable<Sfida> {
 	 * @param campionato
 	 */
 	public Sfida(String id, String descrizione, Orario ora, String partecipante1, String partecipante2,
-			boolean campionato) throws IdNonValidoException, OraNonValidaException {
+			boolean campionato) throws OraNonValidaException {
 
-		if (Integer.parseInt(id) >= 0)
-			throw new IdNonValidoException("Id inserito non valido");
 		this.id = id;
 		this.descrizione = descrizione;
 		if (ora.getOre() < 7 || ora.getOre() > 24)
-			throw new OraNonValidaException("Ora inserita non valida");
+			throw new OraNonValidaException("Ora inserita non valida", ora);
 		this.ora = ora;
 		this.partecipante1 = partecipante1;
 		this.partecipante2 = partecipante2;
@@ -38,21 +36,49 @@ public abstract class Sfida implements Comparable<Sfida> {
 	}
 
 	public Sfida(char c, String descrizione, Orario ora, String partecipante1, String partecipante2, boolean campionato)
-			throws IdNonValidoException, OraNonValidaException {
+			throws OraNonValidaException {
 		this(c + "" + Integer.toString(numSfide), descrizione, ora, partecipante1, partecipante2, campionato);
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public Orario getOra() {
+		return ora;
+	}
+
+	public String getPartecipante1() {
+		return partecipante1;
+	}
+
+	public String getPartecipante2() {
+		return partecipante2;
+	}
+
+	public boolean isCampionato() {
+		return campionato;
+	}
+	
+	public static void setOrdinamento(boolean o) {
+		ordinamentoPerOra = o;
 	}
 
 	public abstract int getPunteggio();
 
 	@Override
 	public String toString() {
-		return "Sfida [id + " + id + " descrizione=" + descrizione + ", ora=" + ora + ", partecipante1=" + partecipante1
+		return "Sfida [id " + id + " descrizione=" + descrizione + ", ora=" + ora + ", partecipante1=" + partecipante1
 				+ ", partecipante2=" + partecipante2 + ", campionato=" + campionato + "]";
 	}
 
 	@Override
 	public int compareTo(Sfida s) {
-		return this.ora.compareTo(s.ora);
+		return ordinamentoPerOra? this.ora.compareTo(s.ora) : this.getPunteggio() - s.getPunteggio();
 	}
 
 }

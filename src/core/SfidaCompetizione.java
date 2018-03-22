@@ -1,7 +1,7 @@
 package core;
 
-import exception.IdNonValidoException;
 import exception.OraNonValidaException;
+import exception.PunteggioNonValidoException;
 import prog.utili.Orario;
 
 public class SfidaCompetizione extends Sfida {
@@ -17,17 +17,21 @@ public class SfidaCompetizione extends Sfida {
 	 * @param campionato
 	 * @param punteggio
 	 * @throws OraNonValidaException
-	 * @throws IdNonValidoException
+	 * @throws PunteggioNonValidoException
 	 */
 	public SfidaCompetizione(String id, String descrizione, Orario ora, String partecipante1, String partecipante2,
-			boolean campionato, int punteggio) throws IdNonValidoException, OraNonValidaException {
+			boolean campionato, int punteggio) throws OraNonValidaException, PunteggioNonValidoException {
 		super(id, descrizione, ora, partecipante1, partecipante2, campionato);
+		if (punteggio < 0 || punteggio > 10)
+			throw new PunteggioNonValidoException("Punteggio non valido", punteggio);
 		this.punteggio = punteggio;
 	}
 
 	public SfidaCompetizione(String descrizione, Orario ora, String partecipante1, String partecipante2,
-			boolean campionato, int punteggio) throws IdNonValidoException, OraNonValidaException {
+			boolean campionato, int punteggio) throws OraNonValidaException, PunteggioNonValidoException {
 		super('C', descrizione, ora, partecipante1, partecipante2, campionato);
+		if (punteggio < 0 || punteggio > 10)
+			throw new PunteggioNonValidoException("Punteggio non valido", punteggio);
 		this.punteggio = punteggio;
 	}
 

@@ -1,6 +1,5 @@
 package core;
 
-import exception.IdNonValidoException;
 import exception.OraNonValidaException;
 import prog.utili.Orario;
 
@@ -17,16 +16,15 @@ public class SfidaNormale extends Sfida {
 	 * @param campionato
 	 * @param luogoSfida
 	 * @throws OraNonValidaException
-	 * @throws IdNonValidoException
 	 */
 	public SfidaNormale(String id, String descrizione, Orario ora, String partecipante1, String partecipante2,
-			boolean campionato, String luogoSfida) throws IdNonValidoException, OraNonValidaException {
+			boolean campionato, String luogoSfida) throws OraNonValidaException {
 		super(id, descrizione, ora, partecipante1, partecipante2, campionato);
 		this.luogoSfida = luogoSfida;
 	}
 
 	public SfidaNormale(String descrizione, Orario ora, String partecipante1, String partecipante2, boolean campionato,
-			String luogoSfida) throws IdNonValidoException, OraNonValidaException {
+			String luogoSfida) throws OraNonValidaException {
 		super('N', descrizione, ora, partecipante1, partecipante2, campionato);
 		this.luogoSfida = luogoSfida;
 	}
