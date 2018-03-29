@@ -27,6 +27,16 @@ public class SfidaCompetizione extends Sfida {
 		this.punteggio = punteggio;
 	}
 
+	/**
+	 * @param descrizione
+	 * @param ora
+	 * @param partecipante1
+	 * @param partecipante2
+	 * @param campionato
+	 * @param punteggio
+	 * @throws OraNonValidaException
+	 * @throws PunteggioNonValidoException
+	 */
 	public SfidaCompetizione(String descrizione, Orario ora, String partecipante1, String partecipante2,
 			boolean campionato, int punteggio) throws OraNonValidaException, PunteggioNonValidoException {
 		super('C', descrizione, ora, partecipante1, partecipante2, campionato);

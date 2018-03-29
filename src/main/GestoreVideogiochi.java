@@ -1,18 +1,27 @@
+/**
+ * @author Mazzucchetti Patrick
+ */
+
 package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
-
 import core.Sfida;
 import exception.IdDuplicatoException;
 
 public class GestoreVideogiochi {
 
-	ArrayList<Sfida> sfide = new ArrayList<>();
+	private ArrayList<Sfida> sfide = new ArrayList<>();
 
+	/**
+	 * 
+	 * @param path
+	 * @throws FileNotFoundException
+	 */
 	public void caricaDaFile(String path) throws FileNotFoundException {
 		File f = new File(path);
 		Scanner sc = new Scanner(f);
@@ -20,6 +29,11 @@ public class GestoreVideogiochi {
 		sc.close();
 	}
 
+	/**
+	 * 
+	 * @param s
+	 * @throws IdDuplicatoException
+	 */
 	public void inserisci(Sfida s) throws IdDuplicatoException {
 		for (Sfida i : sfide)
 			if (i.getId().equals(s.getId()))
@@ -27,13 +41,16 @@ public class GestoreVideogiochi {
 		sfide.add(s);
 	}
 
-	public void stampa(boolean perOra) {
+	public void Stampa(Comparator<Sfida> comparator) {
 
-		Sfida.setOrdinamento(perOra);
+		Collections.sort(sfide, comparator);
 
-		Collections.sort(sfide);
-
-		System.out.println(sfide.toString());
+		for (Sfida i : sfide)
+			System.out.println(i.getPunteggio());
 	}
 
+	public void Stampa() {
+		for (Sfida i : sfide)
+			System.out.println(i.toString());
+	}
 }

@@ -23,6 +23,16 @@ public class SfidaNormale extends Sfida {
 		this.luogoSfida = luogoSfida;
 	}
 
+	/**
+	 * 
+	 * @param descrizione
+	 * @param ora
+	 * @param partecipante1
+	 * @param partecipante2
+	 * @param campionato
+	 * @param luogoSfida
+	 * @throws OraNonValidaException
+	 */
 	public SfidaNormale(String descrizione, Orario ora, String partecipante1, String partecipante2, boolean campionato,
 			String luogoSfida) throws OraNonValidaException {
 		super('N', descrizione, ora, partecipante1, partecipante2, campionato);

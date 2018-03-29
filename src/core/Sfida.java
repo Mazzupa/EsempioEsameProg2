@@ -1,14 +1,15 @@
-package core;
+/**
+ * @author Mazzucchetti Patrick
+ */
 
-/**/
+package core;
 
 import exception.OraNonValidaException;
 import prog.utili.Orario;
 
-public abstract class Sfida implements Comparable<Sfida> {
+public abstract class Sfida {
 
 	private static int numSfide = 0;
-	private static boolean ordinamentoPerOra;
 	private String id;
 	private String descrizione;
 	protected Orario ora;
@@ -37,6 +38,16 @@ public abstract class Sfida implements Comparable<Sfida> {
 		numSfide++;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @param descrizione
+	 * @param ora
+	 * @param partecipante1
+	 * @param partecipante2
+	 * @param campionato
+	 * @throws OraNonValidaException
+	 */
 	public Sfida(char c, String descrizione, Orario ora, String partecipante1, String partecipante2, boolean campionato)
 			throws OraNonValidaException {
 		this(c + "" + Integer.toString(numSfide), descrizione, ora, partecipante1, partecipante2, campionato);
@@ -65,10 +76,6 @@ public abstract class Sfida implements Comparable<Sfida> {
 	public boolean isCampionato() {
 		return campionato;
 	}
-	
-	public static void setOrdinamento(boolean o) {
-		ordinamentoPerOra = o;
-	}
 
 	public abstract int getPunteggio();
 
@@ -77,10 +84,4 @@ public abstract class Sfida implements Comparable<Sfida> {
 		return "Sfida [id " + id + " descrizione=" + descrizione + ", ora=" + ora + ", partecipante1=" + partecipante1
 				+ ", partecipante2=" + partecipante2 + ", campionato=" + campionato + "]";
 	}
-
-	@Override
-	public int compareTo(Sfida s) {
-		return ordinamentoPerOra? this.ora.compareTo(s.ora) : this.getPunteggio() - s.getPunteggio();
-	}
-
 }
